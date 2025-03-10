@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/two/popup.css">
+</head>
+<body>
+  
+    <header>
+      <h2>Welcome to our platform!</h2>
+      <a href="#" id="sign-up">Sign in</a>
+    </header>
+    <div class="overlay"id="overlayPop"></div>
+    <div class="popup" id="signup-popup">
+        <span id="close" class="close-btn">X</span>
+      <form action="">
+          <h2>Sign up</h2>
+          <div >
+              <label for="name">Name</label><br>
+              <input type="text"placeholder="Full Names" required>
+          </div>
+          <div>
+              <label for="email">Email</label><br>
+              <input type="email"placeholder="Email address" required>
+          </div>
+          <div>
+              <label for="Password">Password</label><br>
+              <input type="Password"placeholder="Email address" required>
+          </div>
+          <div class="logins">
+              <button type="submit">Register</button>
+              <button type="login">Log in</button>
+          </div>
+      </form>
+    </div>
+  <script src="/two/popup.js"></script>
+</body>
+</html>

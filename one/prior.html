@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .countries{
+           
+            display: flex;
+            
+            flex-wrap: wrap;
+            flex: wrap;
+            
+            gap: 1rem;
+        }
+        .component{
+            width: 20%;
+           gap: 1rem;
+           color: white;
+           display: flex;
+           flex-direction: column;
+           background-color: rgb(9, 9, 66);
+           padding: 20px;
+        }
+        .countries img{
+            width: 100%;
+            gap: 1rem;
+        }
+
+
+    </style>
+</head>
+<body>
+    <input type="search" name="" id="searchInput"> 
+    <div class="countries">
+  </div>
+    <script>
+        async function fetchData() {
+            let response=await fetch("https://restcountries.com/v3.1/all")
+            let data=await response.json()
+            console.log(data)
+            let container=document.querySelector(".countries")
+            let htmlContent=''
+            data.forEach(country => {
+                htmlContent+=`
+                        
+                        <div class="component">
+                      <img src="${country.flags.svg}" alt="">
+                        <h2>Name: ${country.name.common}</h2>
+                        <span>Population:${country.population}</span>
+                       <span>Region:${country.region}</span>
+                       <span>Sub-Region: ${country.subregion}</span>
+
+                       <span></span>
+                        </div>
+                    `
+                    container.innerHTML=htmlContent
+            });
+        }
+        const handleSearch = () => {
+            const searchTerm = searchInput.value.toLowerCase();
+          const filteredCountries = countries.filter((country) =>
+            country.name.common.toLowerCase().includes(searchTerm)
+          );
+          displayCountries(filteredCountries);
+
+        }
+        searchInput.addEventListener("input", handleSearch);
+        fetchData()
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+.box{
+    display: flex;
+    width: 90%;
+    margin: 10px auto;
+}
+.searchbtn{
+    color: white;
+    background-color: rgb(7, 7, 54);
+    border-radius: 3px;
+    padding: 20px auto;
+    font-size: 15px;
+}
+#countries{
+    width: 90%;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 10px auto;
+}
+.country-details{
+    background-color: rgb(6, 6, 52);
+    color: white;
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    padding:10px 15px 10px 15px ;
+    border-radius: 3px;
+}
+.country-details img{
+    width: 100%;
+}
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="search" class="searchcontent"id="searchInput"placeholder="enter country name">
+        <button class="searchbtn">search</button>
+    </div>
+    
+    <div id="countries"></div>
+    <script>
+        const searchInput=document.getElementById("searchInput");
+        const countryContainer=document.getElementById("countries");
+        let countries=[];
+        const fetchCountries= async()=>{
+               try{
+                const response=await fetch("https://restcountries.com/v3.1/all")
+                if(!response.ok)throw new error("fail to reload countries")
+                countries=await response.json();
+             displayCountries(countries);
+               }
+               catch(error){
+                console.error("error while loading countries",error)
+                countryContainer.innerHTML=`<p style="color:red">failed</p>`
+               }
+            }
+        const displayCountries=(filtercountries)=>{
+            countryContainer.innerHTML=""
+
+            if(filtercountries.length===0){
+                countryContainer.innerHTML=`<p>no matching countries found</p>`
+            }
+            filtercountries.forEach(country => {
+                const countryElement=document.createElement("div")
+                countryElement.classList.add("country-details")
+                countryElement.innerHTML=`
+                         <img src="${country.flags.svg}" alt="">
+                        <h2>Name: ${country.name.common}</h2>
+                        <span>Population:${country.population}</span>
+                       <span>Region:${country.region}</span>
+                       <span>Sub-Region: ${country.subregion}</span>
+                `
+                countryContainer.appendChild(countryElement);
+            });
+        }
+        const handleSearch = () => {
+          const searchTerm = searchInput.value.toLowerCase();
+          const filteredCountries = countries.filter((country) =>
+            country.name.common.toLowerCase().includes(searchTerm)
+          );
+          displayCountries(filteredCountries);
+        };
+        
+        // Attach event listener for real-time search
+         searchInput.addEventListener("input", handleSearch);
+        
+        // Fetch countries when the page loads
+        fetchCountries();
+    </script>
+</body>
+</html>

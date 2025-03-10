@@ -1,0 +1,58 @@
+body{
+    background-color: rgb(118, 8, 8);
+}
+
+
+header{
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 20px auto;
+    width: 90%;
+    font-size: 30px;
+}
+header a{
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    font-size: 25px;
+    margin:
+     20px auto;
+    width: 90%;
+    align-items: center;
+    padding: 20px;
+}
+
+/* .logins{
+    display: flex;
+    margin: 20px auto;
+    width: 90%;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+} */
+#signup-popup{
+    display: none;
+   
+}
+.overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(237, 227, 227,0.6);
+}
+#overlayPop{
+    display: none;
+}
+.close-btn{
+    float: right;
+    cursor: pointer;
+    color: black;
+    font-size: 30px;
+}
